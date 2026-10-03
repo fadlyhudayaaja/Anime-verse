@@ -1,10 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:pertemuan1/screens/detail_screen.dart';
-import 'package:pertemuan1/screens/favorite_screen.dart';
-import 'package:pertemuan1/screens/home_screen.dart';
-import 'package:pertemuan1/screens/profile_screen.dart';
-import 'package:pertemuan1/screens/signin_screen.dart';
-import 'package:pertemuan1/screens/signup_screen.dart';
+import 'config/routes.dart';
 void main() {
   runApp(const MyApp());
 }
@@ -15,12 +10,12 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return MaterialApp.router(
       title: 'Anime Verse',
       theme: ThemeData(
         fontFamily: 'Urbanist',
       ),
-      home: const SignInScreen(),
+      routerConfig: createRouter(),
       debugShowCheckedModeBanner: false,
     );
   }
