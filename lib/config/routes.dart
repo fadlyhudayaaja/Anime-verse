@@ -1,6 +1,5 @@
 import 'package:flutter/cupertino.dart';
 import 'package:go_router/go_router.dart';
-import 'package:pertemuan1/screens/favorite_screen.dart';
 
 import '../screens/detail_screen.dart';
 import '../screens/favorite_screen.dart';
@@ -9,6 +8,7 @@ import '../screens/profile_screen.dart';
 import '../screens/signin_screen.dart';
 import '../screens/signup_screen.dart';
 import '../widgets/bottom_navigation_shell.dart';
+
 class AppRoutes {
   static const String signIn = '/sign-in';
   static const String signUp = '/sign-up';

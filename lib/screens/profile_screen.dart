@@ -47,10 +47,10 @@ class ProfileScreen extends StatelessWidget {
                     ),
                   ),
                   SizedBox(height: screenHeight * 0.02),
-                  Text('Fadly Hudaya Simanjuntak', style: TextStyle(fontSize:
+                  Text('IKLC AnimeVerse', style: TextStyle(fontSize:
                   screenWidth * 0.055, fontWeight: FontWeight.bold, color: Colors.white)),
                   SizedBox(height: screenHeight * 0.005),
-                  Text('fadlyhudaya@gmail.com', style:
+                  Text('iklcanimeverse@gmail.com', style:
                   TextStyle(fontSize: screenWidth * 0.038, color: Colors.white70)),
                   SizedBox(height: screenHeight * 0.015),
                   Container(

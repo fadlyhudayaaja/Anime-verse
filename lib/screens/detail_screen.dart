@@ -1,30 +1,16 @@
 import 'package:flutter/material.dart';
+import 'package:pertemuan1/data/dummy_data.dart';
+import 'package:pertemuan1/models/anime.dart';
+import 'package:pertemuan1/providers/app_state_provider.dart';
 import 'package:provider/provider.dart';
-import '../data/dummy_data.dart';
-import '../models/anime.dart';
 import '../widgets/app_scaffold.dart';
-import '../providers/app_state_provider.dart';
 
 class DetailScreen extends StatelessWidget {
   final String id;
 
-  // final String title;
-  // final String imagePath;
-  // final String genre;
-  // final String rating;
-  // final String totalEpisodes;
-  // final String description;
-
   const DetailScreen({
     super.key,
     required this.id,
-
-    // this.title = 'Black Clover',
-    // this.imagePath = 'assets/images/black_clover.jpg',
-    // this.genre = 'Action, Adventure, Fantasy',
-    // this.rating = '8.14',
-    // this.totalEpisodes = '170',
-    // this.description = "",
   });
 
   @override
@@ -35,14 +21,14 @@ class DetailScreen extends StatelessWidget {
     final Anime? anime = DummyData.animeList
         .cast<Anime?>()
         .firstWhere(
-          (anime) => anime?.id == id,
+          (item) => item?.id == id,
       orElse: () => null,
     );
 
     if (anime == null) {
       return Scaffold(
         appBar: AppBar(
-          title: Text('Anime Not Found'),
+          title: const Text('Anime not found.'),
         ),
         body: const Center(
           child: Text('Anime tidak ditemukan.'),
@@ -86,13 +72,10 @@ class DetailScreen extends StatelessWidget {
               background: Stack(
                 fit: StackFit.expand,
                 children: [
-                  // Background image
                   Image.asset(
                     anime.imagePath,
                     fit: BoxFit.cover,
                   ),
-
-                  // Gradient overlay for better text visibility
                   Container(
                     decoration: BoxDecoration(
                       gradient: LinearGradient(
@@ -107,8 +90,6 @@ class DetailScreen extends StatelessWidget {
                       ),
                     ),
                   ),
-
-                  // Title at the bottom of the image
                   Positioned(
                     bottom: screenHeight * 0.02,
                     left: screenWidth * 0.04,
@@ -165,7 +146,7 @@ class DetailScreen extends StatelessWidget {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  // Rating and Episodes info
+
                   Row(
                     children: [
                       // Rating
@@ -211,7 +192,7 @@ class DetailScreen extends StatelessWidget {
                         ),
                       ),
 
-                      SizedBox(width: screenWidth * 0.05),
+                      SizedBox(width: screenWidth * 0.03),
 
                       // Total Episodes
                       Container(
@@ -220,7 +201,7 @@ class DetailScreen extends StatelessWidget {
                           vertical: screenHeight * 0.01,
                         ),
                         decoration: BoxDecoration(
-                          color: const Color(0xFF0b395e),
+                          color: const Color(0xFF0B395E),
                           boxShadow: [
                             BoxShadow(
                               color: Colors.black.withValues(alpha: 0.3),
@@ -245,11 +226,15 @@ class DetailScreen extends StatelessWidget {
                         ),
                       ),
 
-                      SizedBox(width: screenWidth * 0.05),
+                      const Spacer(),
 
-                      // Add to Favorites
+                      // Favorite Button
                       Consumer<AppStateProvider>(
-                        builder: (context, favoriteProvider, child) {
+                        builder: (
+                            context,
+                            favoriteProvider,
+                            child,
+                            ) {
                           final isFavorite =
                           favoriteProvider.isFavorite(anime.id);
 
@@ -259,11 +244,13 @@ class DetailScreen extends StatelessWidget {
                             },
                             child: Container(
                               padding: EdgeInsets.symmetric(
-                                horizontal: screenWidth * 0.03,
+                                horizontal: screenWidth * 0.025,
                                 vertical: screenHeight * 0.01,
                               ),
                               decoration: BoxDecoration(
-                                color: Colors.redAccent,
+                                color: isFavorite
+                                    ? Colors.grey.shade700
+                                    : Colors.redAccent,
                                 boxShadow: [
                                   BoxShadow(
                                     color: Colors.black.withValues(
@@ -292,12 +279,10 @@ class DetailScreen extends StatelessWidget {
                                   ),
                                   SizedBox(width: screenWidth * 0.01),
                                   Text(
-                                    isFavorite
-                                        ? 'Added to Favorites'
-                                        : 'Add to Favorites',
+                                    isFavorite ? 'Added to favorite' : 'Add to favorite',
                                     style: TextStyle(
                                       color: Colors.white,
-                                      fontSize: screenWidth * 0.035,
+                                      fontSize: screenWidth * 0.03,
                                       fontWeight: FontWeight.w700,
                                     ),
                                   ),
@@ -309,6 +294,9 @@ class DetailScreen extends StatelessWidget {
                       ),
                     ],
                   ),
+
+                  SizedBox(height: screenHeight * 0.03),
+
                   // Synopsis
                   Text(
                     'Synopsis',
@@ -321,6 +309,7 @@ class DetailScreen extends StatelessWidget {
 
                   SizedBox(height: screenHeight * 0.015),
 
+                  // Anime Description
                   Text(
                     anime.description,
                     style: TextStyle(
